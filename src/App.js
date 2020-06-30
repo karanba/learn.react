@@ -1,26 +1,52 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Car extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { color: 'red' };
+  }
+  static getDerivedStateFromProps(props, state) {
+    return { favColor: props.color };
+  }
+  changeColor = () => {
+    this.setState({ color: 'aqua' });
+    console.log(this.state);
+    console.log(this.props);
+  };
+  myChangeHandler = (event) => {
+    this.setState({ color: event.target.value });
+  };
+  render() {
+    //this.props.color = 'black';
+    return (
+      <p>
+        Hi, I am a car in <b>{this.state.color}</b> and the prop color is <b>{this.props.color}</b>
+        <br />
+        <input type='text' value={this.state.color} onChange={this.myChangeHandler} />
+        <button type='button' onClick={this.changeColor}>
+          Change Color
+        </button>
+        <select value={this.state.color} onChange={this.myChangeHandler}>
+          <option value='red'>red</option>
+          <option value='yellow'>yellow</option>
+          <option value='white'>white</option>
+          <option value='aqua'>aqua</option>
+        </select>
+      </p>
+    );
+  }
 }
 
-export default App;
+class Garage extends React.Component {
+  render() {
+    const color = 'purple';
+    return (
+      <div>
+        <h1>Who ** lives in my Garage</h1>
+        <Car color={color} />
+      </div>
+    );
+  }
+}
+
+export default Garage;
