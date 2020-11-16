@@ -42,7 +42,7 @@ class Garage extends React.Component {
     const color = 'purple';
     return (
       <div>
-        <h1>Who ** lives in my Garage</h1>
+        <h1>Who ** lives in my Garage f</h1>
         <Car color={color} />
       </div>
     );
